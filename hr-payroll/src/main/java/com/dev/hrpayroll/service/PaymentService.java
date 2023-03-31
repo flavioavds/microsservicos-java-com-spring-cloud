@@ -14,7 +14,7 @@ public class PaymentService {
 //	private String workerHost;
 	
 //	@Autowired
-//	private RestTemplate restTemplate;
+//	private RestTemplate restTemplate;	
 	
 	@Autowired
 	private WorkerFeignClient workerFeignClient;
