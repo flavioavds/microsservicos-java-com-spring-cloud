@@ -1,13 +1,13 @@
-package com.dev.hrapigatewaycloud;
+package com.dev.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HrApiGatewayCloudApplication {
+public class HrApiGatewayApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HrApiGatewayCloudApplication.class, args);
+		SpringApplication.run(HrApiGatewayApplication.class, args);
 	}
 
 }
