@@ -1,15 +1,15 @@
-package com.dev.hroauth.entities.token;
+package com.dev.hroauth.entities.tokenDTO;
 
-public class LoginUserDTO {
+public class LoginRequest {
 	
 	private String email;
 	private String password;
 	
-	public LoginUserDTO() {
+	public LoginRequest() {
 		super();
 	}
 
-	public LoginUserDTO(String email, String password) {
+	public LoginRequest(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;

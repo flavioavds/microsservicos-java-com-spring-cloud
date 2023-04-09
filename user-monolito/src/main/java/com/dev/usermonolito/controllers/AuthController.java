@@ -15,6 +15,7 @@ import com.dev.usermonolito.payload.request.LoginRequest;
 import com.dev.usermonolito.payload.request.TokenDTO;
 import com.dev.usermonolito.payload.response.MessageResponse;
 import com.dev.usermonolito.security.services.UserServicesSecurity;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("v1/api/auth")

@@ -1,4 +1,4 @@
-package com.dev.hroauth.entities.token;
+package com.dev.hroauth.entities.tokenDTO;
 
 import java.time.LocalDateTime;
 

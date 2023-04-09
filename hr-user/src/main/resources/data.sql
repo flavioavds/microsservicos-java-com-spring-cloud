@@ -1,9 +1,5 @@
-INSERT INTO tb_user (name, email, password) VALUES ('Nina Brown', 'nina@gmail.com', '$2a$10$9f0ufplymFp5DDAgvEDuYedB5ejNp2VmhB3ExM1Lkopvc29yEGyhe');
-INSERT INTO tb_user (name, email, password) VALUES ('Leia Red', 'leia@gmail.com', '$2a$10$9f0ufplymFp5DDAgvEDuYedB5ejNp2VmhB3ExM1Lkopvc29yEGyhe');
+INSERT INTO tb_user (name,  email, password) VALUES ('Flavio Augusto', 'flavio@gmail.com', '$2a$10$ZGjBlvyOwkDtMkuViEJZnuFhEiJ1XKZBc.8/f1r3rclrU.EskQAJW');
+INSERT INTO tb_user (name,  email, password) VALUES ('Rogerio Venancio', 'rogerio.com', '$2a$10$ZGjBlvyOwkDtMkuViEJZnuFhEiJ1XKZBc.8/f1r3rclrU.EskQAJW');
 
-INSERT INTO tb_role (role_name) VALUES ('ROLE_OPERATOR');
-INSERT INTO tb_role (role_name) VALUES ('ROLE_ADMIN');
-
-INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
-INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1);
-INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
+INSERT INTO roles (user_id, roles) VALUES (1, 1);
+INSERT INTO roles (user_id, roles) VALUES (2, 2); 

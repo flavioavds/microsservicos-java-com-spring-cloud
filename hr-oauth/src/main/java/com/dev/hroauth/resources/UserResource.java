@@ -14,19 +14,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.hroauth.entities.User;
+import com.dev.hroauth.exception.Messagem;
 import com.dev.hroauth.services.UserService;
 
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/v1/users")
 public class UserResource {
 
 	@Autowired
 	private UserService service;
 	
+	@GetMapping(value = "/all")
+	public List<User> getAllUsers(){
+		return service.findAll();
+	}
+	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<User> findById(@PathVariable Long id){
-		User obj = service.findById(id);
-		return ResponseEntity.ok(obj);
+	public ResponseEntity<User> findByEmail(@PathVariable Long id){
+		
+		try {
+			User user = service.findById(id);
+			return ResponseEntity.ok(user);
+			
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+	}
+	
+	@GetMapping(value = "/email")
+	public ResponseEntity<User> findByEmailConteins(@RequestParam String email){
+		
+		try {
+			User user = service.findByEmailConteins(email);
+			return ResponseEntity.ok(user);
+			
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 	}
 	
 	@GetMapping(value = "/search")
@@ -41,17 +65,23 @@ public class UserResource {
 		}
 	}
 	
-	@PostMapping(value = "/register")
-	public ResponseEntity<User> saveNewUser(@RequestBody User user){
-		service.save(user);		 
-		return new ResponseEntity<>(HttpStatus.CREATED);
-	}	
-	
-	@GetMapping("/list")
-	public ResponseEntity<List<User>> getAll(){
-		List<User> findAll = service.findAll();
-		return new ResponseEntity<>(findAll, HttpStatus.OK);
+	@GetMapping(value = "/name")
+	public ResponseEntity<User> findByName(@RequestParam String name){
+		
+		try {
+			User user = service.findByName(name);
+			return ResponseEntity.ok(user);
+			
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 	}
-
+	
+	@PostMapping(value = "/register")
+	public ResponseEntity<Object> saveNewUser(@RequestBody User user){
+		service.saveUser(user);
+		return new ResponseEntity<>(new Messagem("Cadastro Realizado com Sucesso!"), HttpStatus.CREATED);
+	}
+	
 	
 }

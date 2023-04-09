@@ -14,32 +14,51 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.hruser.entities.User;
-import com.dev.hruser.repositories.UserRepository;
 import com.dev.hruser.resources.exception.Messagem;
 import com.dev.hruser.resources.exception.UnsuportedMathOperationException;
 import com.dev.hruser.service.UserService;
 
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/v1/users")
 public class UserResource {
 	
 	@Autowired
-	private UserRepository repository;
+	private UserService service;	
 	
-	@Autowired
-	private UserService service;
+	@GetMapping(value = "/all")
+	public List<User> getAllUsers(){
+		return service.findAllUser();
+	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<User> findById(@PathVariable Long id){
-		User obj = repository.findById(id).get();
-		return ResponseEntity.ok(obj);
+		User getId = service.getUserId(id);
+		return ResponseEntity.ok().body(getId);
+	}
+	
+	@GetMapping(value = "/email")
+	public ResponseEntity<User> getEmail(@RequestParam String email){
+		User getEmail = service.getUserEmail(email);
+		return ResponseEntity.ok().body(getEmail);
 	}
 	
 	@GetMapping(value = "/search")
 	public ResponseEntity<User> findByEmail(@RequestParam String email){
-		User obj = repository.findByEmail(email);
-		return ResponseEntity.ok(obj);
+		User getEmail = service.findByEmail(email);
+		return ResponseEntity.ok().body(getEmail);
 	}
+	
+	@GetMapping("/name")
+	public ResponseEntity<User> findByName(@RequestParam String name){
+		User getName = service.getUserName(name);
+		return ResponseEntity.ok().body(getName);
+	}
+	
+	@GetMapping(value = "/search/{email}")
+	public boolean findByUserEmail(@PathVariable String email){
+		return service.existsEmail(email);
+	}
+	
 	
 	@PostMapping(value = "/register")
 	public ResponseEntity<Object> saveNewUser(@RequestBody User user){
@@ -50,11 +69,4 @@ public class UserResource {
 		service.saveUser(user);
 		return new ResponseEntity<>(new Messagem("Cadastro Realizado com Sucesso!"), HttpStatus.CREATED);
 	}
-	
-	@GetMapping("/list")
-	public ResponseEntity<List<User>> getAll(){
-		List<User> findAll = service.findAllUser();
-		return new ResponseEntity<>(findAll, HttpStatus.OK);
-	}
-
 }
